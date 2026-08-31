@@ -47,10 +47,36 @@ Sea level rise exhibits high linearity over short observation windows due to oce
 
 ---
 
-## Formula Implementation (Google Sheets)
+## Google Sheets Formula Implementation
 
-Calculations were performed directly in Google Sheets using dynamic array formulas:
+All statistical indicators and prediction errors were computed dynamically in Google Sheets using the exact setup below:
 
-* **Polynomial Coefficients & $R^2$**:
-  ```excel
-  =INDEX(LINEST(D2:D22, A2:A22^{1,2}, TRUE, TRUE), 3, 1)
+### 1. Atmospheric CO₂ Concentration (`B2:B22` vs. `A2:A22`)
+
+* **R² Values (Coefficient of Determination)**:
+  * Degree 1 (Linear): `=RSQ(B2:B22, A2:A22)`
+  * Degree 2 (Quadratic): `=INDEX(LINEST(B2:B22, A2:A22^{1,2}, TRUE, TRUE), 3, 1)`
+  * Degree 3 (Cubic): `=INDEX(LINEST(B2:B22, A2:A22^{1,2,3}, TRUE, TRUE), 3, 1)`
+  * Degree 4 (Quartic): `=INDEX(LINEST(B2:B22, A2:A22^{1,2,3,4}, TRUE, TRUE), 3, 1)`
+
+* **Root Mean Squared Error (RMSE)**:
+  * Degree 1 (Linear via Prediction Column `G2:G22`): `=SQRT(AVERAGE(ARRAYFORMULA((B2:B22 - G2:G22)^2)))`
+  * Degree 2 (Quadratic): `=SQRT(AVERAGE(ARRAYFORMULA((B2:B22 - TREND(B2:B22, A2:A22^{1,2}))^2)))`
+  * Degree 3 (Cubic): `=SQRT(AVERAGE(ARRAYFORMULA((B2:B22 - TREND(B2:B22, A2:A22^{1,2,3}))^2)))`
+  * Degree 4 (Quartic): `=SQRT(AVERAGE(ARRAYFORMULA((B2:B22 - TREND(B2:B22, A2:A22^{1,2,3,4}))^2)))`
+
+---
+
+### 2. Sea Level Rise (`D2:D22` vs. `A2:A22`)
+
+* **R² Values (Coefficient of Determination)**:
+  * Degree 1 (Linear): `=RSQ(D2:D22, A2:A22)`
+  * Degree 2 (Quadratic): `=INDEX(LINEST(D2:D22, A2:A22^{1,2}, TRUE, TRUE), 3, 1)`
+  * Degree 3 (Cubic): `=INDEX(LINEST(D2:D22, A2:A22^{1,2,3}, TRUE, TRUE), 3, 1)`
+  * Degree 4 (Quartic): `=INDEX(LINEST(D2:D22, A2:A22^{1,2,3,4}, TRUE, TRUE), 3, 1)`
+
+* **Root Mean Squared Error (RMSE)**:
+  * Degree 1 (Linear): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22))^2)))`
+  * Degree 2 (Quadratic): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22^{1,2}))^2)))`
+  * Degree 3 (Cubic): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22^{1,2,3}))^2)))`
+  * Degree 4 (Quartic): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22^{1,2,3,4}))^2)))`
