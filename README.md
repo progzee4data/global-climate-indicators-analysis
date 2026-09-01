@@ -1,12 +1,12 @@
 # Global Climate Indicators Analysis (2000–2020)
 
-An empirical data analysis project evaluating non-linear trends, polynomial regression performance, and bias-variance tradeoffs across global climate indicators using Google Sheets and quantitative accuracy metrics.
+An empirical data analysis project evaluating non linear trends, polynomial regression performance, and bias variance tradeoff's across global climate indicators using Google Sheets and quantitative accuracy metrics.
 
 ---
 
 ## Project Overview
 
-This project analyzes key global climate metrics—specifically **Atmospheric CO₂ Concentration (ppm)** and **Sea Level Rise (mm)**—over a 20-year period (2000–2020). By fitting linear and higher-degree polynomial trendlines, calculating explicit residuals, and measuring precision metrics ($R^2$, MAE, MSE, RMSE), this analysis explores model selection and the physical dynamics of climate systems.
+This project analyzes key global climate metrics specifically **Atmospheric CO₂ Concentration (ppm)** and **Sea Level Rise (mm)** over a 20 year period (2000–2020). By fitting linear and higher degree polynomial trendlines, calculating explicit residuals, and measuring precision metrics ($R^2$, MAE, MSE, RMSE), this analysis explores model selection and the physical dynamics of climate systems.
 
 ---
 
@@ -14,7 +14,7 @@ This project analyzes key global climate metrics—specifically **Atmospheric CO
 
 ### 1. Atmospheric CO₂ Concentration over Time
 
-Linear models underfit atmospheric CO₂ data due to direct, accelerating human carbon emissions. Moving to a **Quadratic (Degree 2)** fit eliminates structural U-shaped residual patterns and reduces prediction error by over 50%.
+Linear models underfit atmospheric CO₂ data due to direct, accelerating human carbon emissions. Moving to a **Quadratic (Degree 2)** fit eliminates structural U shaped residual patterns and reduces prediction error by over 50%.
 
 | Degree | Fit Type | Trendline Equation ($x = \text{Year}$) | $R^2$ Value | RMSE (ppm) | Model Evaluation |
 | :---: | :--- | :--- | :---: | :---: | :--- |
@@ -40,10 +40,10 @@ Sea level rise exhibits high linearity over short observation windows due to oce
 
 ## Analytical Takeaways
 
-* **Underfitting (Degree 1)**: Linear trendlines yield high $R^2$ values (>0.99) but fail to capture non-linear acceleration, leaving systematic U-shaped residual patterns in both datasets.
-* **The Sweet Spot (Degree 2)**: Quadratic polynomials provide the ideal balance. They eliminate structural residual bias, reduce RMSE dramatically (75% drop in Sea Level Rise error; >50% drop in CO₂ error), and reflect real-world climate physics without introducing artificial inflection points.
-* **Overfitting (Degrees 3 & 4)**: Higher-degree models yield negligible improvements in $R^2$ while fitting short-term observational noise, making them unreliable for long-term forecasting.
-* **Physical System Dynamics**: While CO₂ shows immediate non-linear acceleration due to direct industrial output, sea level rise appears more linear over short 20-year windows because the ocean's thermal inertia buffers rapid change.
+* **Underfitting (Degree 1)**: Linear trendlines yield high $R^2$ values (>0.99) but fail to capture non linear acceleration, leaving systematic U shaped residual patterns in both datasets.
+* **The Sweet Spot (Degree 2)**: Quadratic polynomials provide the ideal balance. They eliminate structural residual bias, reduce RMSE dramatically (75% drop in Sea Level Rise error; >50% drop in CO₂ error), and reflect real world climate physics without introducing artificial inflection points.
+* **Overfitting (Degrees 3 & 4)**: Higher degree models yield negligible improvements in $R^2$ while fitting short-term observational noise, making them unreliable for long term forecasting.
+* **Physical System Dynamics**: While CO₂ shows immediate non linear acceleration due to direct industrial output, sea level rise appears more linear over short 20 year windows because the ocean's thermal inertia buffers rapid change.
 
 ---
 
@@ -81,4 +81,4 @@ All statistical indicators and prediction errors were computed dynamically in Go
   * Degree 3 (Cubic): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22^{1,2,3}))^2)))`
   * Degree 4 (Quartic): `=SQRT(AVERAGE(ARRAYFORMULA((D2:D22 - TREND(D2:D22, A2:A22^{1,2,3,4}))^2)))`
 
-This project was completed as part of the ALX Africa Data Science Program using the dataset Global_Climate_Indicators_2000_2020 to evaluate linear and non-linear trends, regression performance, and model selection across atmospheric $\text{CO}_2$ concentration and sea level rise between 2000 and 2020. Dynamic spreadsheets were developed utilizing matrix regression functions (LINEST, TREND, RSQ), custom array formulas, explicit parameter trendline equations, and residual error pipelines ($\text{MAE}$, $\text{MSE}$, $\text{RMSE}$). Evaluating polynomial models (Degrees 1–4) proved that while strong linear baselines exist ($R^2 > 0.99$), transitioning to a quadratic model reduces Root Mean Squared Error (RMSE) by over 50.00% for atmospheric $\text{CO}_2$ concentration (from $0.753\text{ ppm}$ to $0.364\text{ ppm}$) and 75.00% for sea level rise (from $2.254\text{ mm}$ to $0.557\text{ mm}$)—capturing underlying physical acceleration due to emissions and ocean thermal inertia while demonstrating the bias-variance tradeoff across distinct planetary systems.
+This project was completed as part of the ALX Africa Data Science Program using the dataset Global_Climate_Indicators_2000_2020 to evaluate linear and non linear trends, regression performance, and model selection across atmospheric $\text{CO}_2$ concentration and sea level rise between 2000 and 2020. Dynamic spreadsheets were developed utilizing matrix regression functions (LINEST, TREND, RSQ), custom array formulas, explicit parameter trendline equations, and residual error pipelines ($\text{MAE}$, $\text{MSE}$, $\text{RMSE}$). Evaluating polynomial models (Degrees 1–4) proved that while strong linear baselines exist ($R^2 > 0.99$), transitioning to a quadratic model reduces Root Mean Squared Error (RMSE) by over 50.00% for atmospheric $\text{CO}_2$ concentration (from $0.753\text{ ppm}$ to $0.364\text{ ppm}$) and 75.00% for sea level rise (from $2.254\text{ mm}$ to $0.557\text{ mm}$)—capturing underlying physical acceleration due to emissions and ocean thermal inertia while demonstrating the bias-variance tradeoff across distinct planetary systems.
